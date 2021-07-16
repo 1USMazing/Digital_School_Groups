@@ -1,0 +1,41 @@
+﻿@model Proiect_DSG.Models.ApplicationUser
+
+@{
+	ViewBag.Title = "Show";
+}
+
+<div class="panel panel-primary">
+
+	<div class="panel-heading">
+		<h2>Nume: @Model.UserName</h2>
+	</div>
+
+	<div class="panel-body">
+		<p>Email: @Model.Email</p>
+		@if (Model.PhoneNumber != null)
+		{
+			<p>Telefon: @Model.PhoneNumber</p>
+		}
+		<p>Rol: @ViewBag.RoleName</p>
+	</div>
+
+	<div class="panel-footer">
+
+		<div style="display: inline-block">
+			<a href="/Users/Edit/@Model.Id" class="btn btn-success" role="button">Modifica Utilizator</a>
+		</div>
+
+		<div style="display: inline-block">
+			<form method="post" action="/Users/Delete/@Model.Id">
+				@Html.HttpMethodOverride(HttpVerbs.Delete)
+				<button type="submit" class="btn btn-danger">Sterge Utilizator</button>
+			</form>
+		</div>
+	</div>
+
+</div>
+
+<hr />
+<a href="/Users/Index" class="btn btn-primary" role="button">Inapoi la utilizatori</a>
+<br />
+

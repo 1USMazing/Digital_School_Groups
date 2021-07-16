@@ -1,0 +1,26 @@
+﻿@model Proiect_DSG.Models.Group
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+<p>Afisare Formular de editare Grup - datele vechi ale grupului</p>
+
+<form method="post" action="/Groups/Edit/@Model.GroupId">
+    @Html.HttpMethodOverride(HttpVerbs.Put)
+
+    @Html.Label("GroupName", "Nume Grup (maxim 40 de caractere)")
+    <br />
+    @Html.TextBox("GroupName", (string)Model.GroupName, new { @class = "form-control" })
+    @Html.ValidationMessage("GroupName", "Numele grupului este obligatoriu!", new { @class = "text-danger " })
+    <br /><br />
+
+    @Html.Label("GroupDescription", "Descriere Grup")
+    <br />
+    @Html.TextArea("GroupDescription", (string)Model.GroupDescription, new { @class = "form-control" })
+    <br /><br />
+
+    <button type="submit">Modifica Grup</button>
+</form>

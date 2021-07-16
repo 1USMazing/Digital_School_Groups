@@ -1,0 +1,45 @@
+﻿@model Proiect_DSG.Models.ApplicationUser
+
+@{
+	ViewBag.Title = "Edit";
+}
+
+@using (Html.BeginForm(actionName: "Edit", controllerName: "Users", routeValues: new { id = Model.Id }))
+{
+	@Html.HttpMethodOverride(HttpVerbs.Put)
+
+	<br />
+
+	@Html.Label("UserName", "Nume Utilizator", new { @class=""})
+	
+	<br />
+
+	@Html.EditorFor(m=>m.UserName)
+
+	<br /><br />
+
+	@Html.Label("Email", "Email utilizator", new {@class=""})
+
+	<br />
+
+	@Html.EditorFor(m=>m.Email)
+
+	<br /><br />
+
+	@Html.Label("PhoneNumber", "Numar telefon")
+
+	<br />
+
+	@Html.EditorFor(m=>m.PhoneNumber)
+
+	<br /><br />
+
+	<label>Selectati rolul</label>
+	@Html.DropDownList("newRole", new SelectList(Model.AllRoles, "Value", "Text", ViewBag.UserRole), null, new { @class="form-control"})
+
+	<br />
+
+	<button class="btn btn-success" type="submit">Modifica datele utilizatorului</button>
+
+
+}

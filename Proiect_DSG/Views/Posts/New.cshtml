@@ -1,0 +1,29 @@
+﻿@model Proiect_DSG.Models.Post
+
+@{
+    ViewBag.Title = "NewPost";
+}
+
+<h2>Creare Postare</h2>
+
+<form method="post" action="@Url.Action("New", "Posts", new { id = @Model.GroupId})">
+
+	<!--<label>Text postare</label>-->
+	@Html.Label("Text", "Text postare")
+	<!--<textarea name="Text"></textarea>-->
+	@Html.TextArea("Text", null, new { @class = "form-control" })
+	@Html.ValidationMessage("Text", "Introduceti text >3 caractere", new { @class = "text-danger " })
+	<br />
+	@{/*
+	@Html.Label("GroupId", "Selectati grupul")
+
+	@Html.DropDownListFor(m=>m.GroupId, new SelectList(Model.Groups,
+	"Value", "Text"), "Selectati grupul", new { @class="form-control" })
+
+	@Html.ValidationMessage("GroupId", "Selectia grupului obligatorie", new { @class = "text-danger " })
+	*/}
+
+	<br />
+
+	<button type="submit">Adauga Postare</button>
+</form>

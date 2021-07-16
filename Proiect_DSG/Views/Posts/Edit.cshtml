@@ -1,0 +1,25 @@
+﻿@model Proiect_DSG.Models.Post
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Editarea unei postari</h2>
+
+<p>Afisare formular de editare postare - cu datele vechi ale postarii</p>
+
+<form method="post" action="/Posts/Edit/@Model.PostId">
+
+    @Html.HttpMethodOverride(HttpVerbs.Put)
+
+    <!--<label>Text</label>-->
+    @Html.Label("Text", "Text")
+    <br />
+    <!--<input type="text" name="Text" value="@ViewBag.Post.Text" />-->
+    @Html.TextBox("Text", (string)@ViewBag.Post.Text, new { @class = "form-control" })
+    @Html.ValidationMessage("Text", "Text obligatoriu (>3 caractere)", new { @class = "text-danger " })
+    <br />
+    <br />
+    <button type="submit">Modifica postare</button>
+
+</form>

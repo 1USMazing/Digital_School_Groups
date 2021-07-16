@@ -1,0 +1,24 @@
+﻿
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+<p>Afisar Formular de editare Categorie - datele vechi ale categoriei</p>
+
+<form method="post" action="/Categories/Edit/@ViewBag.Category.CategoryId">
+
+    @Html.HttpMethodOverride(HttpVerbs.Put)
+
+    @Html.Label("CategoryName", "Nume Categorie")
+    <br />
+    @Html.TextBox("CategoryName", (string)ViewBag.Category.CategoryName, new { @class = "form-control" })
+    <br /><br />
+
+    @Html.Label("CategoryDescription", "Descriere Categorie")
+    <br />
+    @Html.TextArea("CategoryDescription", (string)ViewBag.Category.CategoryDescription, new { @class = "form-control" })
+    <br /><br />
+    <button type="submit">Modifica Categorie</button>
+</form>

@@ -1,0 +1,30 @@
+﻿
+@{
+	ViewBag.Title = "Index";
+}
+
+<h1 style="color:green;">@ViewBag.Mesaj</h1>
+<h2>Lista Categoriilor:</h2>
+
+@foreach (var category in ViewBag.Categories)
+{
+	<div class="panel panel-primary">
+		<div class="panel-heading">
+			<h2 class="bg-primary">@category.CategoryName</h2>
+		</div>
+
+		<div class="panel-body">
+			@if (ViewBag.IsAdmin)
+			{
+				<a href="/Categories/Show/@category.CategoryId" class="btn btn-info" role="button">Afisare Categorie</a>
+			}
+		</div>
+	</div>
+}
+
+<br />
+<br />
+@if (ViewBag.IsAdmin)
+{
+	<a href="/Categories/New" a role="button" class="btn btn-success">Creaza Categorie</a>
+}

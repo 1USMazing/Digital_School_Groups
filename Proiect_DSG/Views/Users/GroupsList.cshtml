@@ -1,0 +1,25 @@
+﻿
+@{
+	ViewBag.Title = "GroupsList";
+}
+
+<h2>Lista Grupuri</h2>
+
+@foreach (var grup in ViewBag.Groups)
+{
+	<div class="panel panel-primary">
+
+		<div class="panel-heading">
+			<h1>@grup.GroupName</h1>
+			<p>Creator: @grup.GroupCreatorName</p>
+			<p>Categorie: @grup.Category.CategoryName</p>
+		</div>
+
+		<div class="panel-body">
+			<p>Descriere: @grup.GroupDescription</p>
+			<a href="@Url.Action("Show", "Groups", new { id = grup.GroupId})" class="btn btn-info" role="button">Afisare Grup</a>
+		</div>
+
+		<br />
+	</div>
+}

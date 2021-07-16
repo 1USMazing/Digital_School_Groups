@@ -1,0 +1,30 @@
+﻿
+@{
+	ViewBag.Title = "Index";
+}
+
+<h1 style="color:green;">@ViewBag.Mesaj</h1>
+<h2>Lista Grupuri</h2>
+
+@foreach (var grup in ViewBag.Groups)
+{
+	<div class="panel panel-primary">
+
+		<div class="panel-heading">
+			<h1>@grup.GroupName</h1>
+			<p>Creator: @grup.GroupCreatorName</p>
+			<p>Categorie: @grup.Category.CategoryName</p>
+		</div>
+
+		<div class="panel-body">
+			<p>Descriere: @grup.GroupDescription</p>
+			<a href="/Groups/Show/@grup.GroupId" class="btn btn-info" role="button">Afisare Grup</a>
+		</div>
+
+		<br />
+	</div>
+}
+
+<br />
+<br />
+	<a role="button" class="btn btn-success" href="/Groups/New" >Creaza Grup</a>

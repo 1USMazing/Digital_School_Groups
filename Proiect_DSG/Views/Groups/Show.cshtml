@@ -1,0 +1,109 @@
+﻿@model Proiect_DSG.Models.Group
+@{
+
+	ViewBag.Title = "Show";
+}
+
+<div class="panel panel-primary">
+
+	<div class="panel-heading">
+		<h2>@Model.GroupName</h2>
+
+		<p>Creator: @Model.GroupCreatorName</p>
+
+		<p>Categorie: @Model.Category.CategoryName</p>
+	</div>
+
+	<div class="panel-body">
+		<p>Descriere: @Model.GroupDescription</p>
+	</div>
+
+
+	<div class="panel-footer">
+		@if (ViewBag.Autorizatie || Model.GroupCreatorId == ViewBag.CurrentUser || ViewBag.IsAdmin)
+		{
+
+			<div style="display: inline-block">
+				<a href="/Groups/Edit/@Model.GroupId" class="btn btn-success" role="button">Modifica Grup</a>
+			</div>
+
+			<div style="display: inline-block">
+				<form method="post" action="/Groups/Delete/@Model.GroupId">
+					@Html.HttpMethodOverride(HttpVerbs.Delete)
+					<button type="submit" class="btn btn-danger">Sterge Grup</button>
+				</form>
+			</div>
+		}
+
+		@{ if (Model.GroupCreatorId != ViewBag.CurrentUser && ViewBag.IsAdmin == false && ViewBag.Autorizatie == false && ViewBag.Member == false)
+			{
+				<div style="display: inline-block">
+					<a href="@Url.Action("New", "Memberships", new { id = @Model.GroupId })" class="btn btn-success">Alătură-te Grupului</a>
+				</div>
+			}
+			else if (Model.GroupCreatorId != ViewBag.CurrentUser && ViewBag.IsAdmin == false)
+			{
+				<div style="display: inline-block">
+					<a href="@Url.Action("Delete", "Memberships", new { id = @Model.GroupId })" class="btn btn-warning">Părăsește Grupul</a>
+				</div>
+			}
+		}
+
+		<a href="@Url.Action("List", "Memberships", new { id = @Model.GroupId, name = Model.GroupName })" class = "btn btn-info">Lista membrilor</a>
+		<br />
+		<br />
+
+	</div>
+
+</div>
+
+	@if (ViewBag.Member == true)
+	{
+		foreach (var post in ViewBag.Group.Posts)
+		{
+			<div class="panel panel-default">
+
+				<div class="panel-heading">
+					<div class="panel-title pull-left">@post.UserName</div>
+					<div class="panel-title pull-right">@post.PostData</div>
+					<div class="clearfix"></div>
+				</div>
+
+
+				<div class="panel-body">
+					@post.Text
+				</div>
+
+				<div class="panel-footer">
+					@if (post.UserId == ViewBag.CurrentUser || ViewBag.Autorizatie || ViewBag.IsAdmin || Model.GroupCreatorId == ViewBag.CurrentUser)
+					{
+						<div style="display:inline-block">
+							<a href="/Posts/Edit/@post.PostId" class="glyphicon glyphicon-pencil"></a>
+						</div>
+
+						<div style="display:inline-block">
+							<form method="post" action="@Url.Action("Delete", "Posts", new{id=post.PostId, name=Model.GroupCreatorId})">
+
+								@Html.HttpMethodOverride(HttpVerbs.Delete)
+
+								<button type="submit" class="glyphicon glyphicon-trash"></button>
+
+							</form>
+						</div>
+					}
+				</div>
+
+			</div>
+		}
+	}
+
+@if (ViewBag.Member == true)
+{
+	<br />
+	<a href="@Url.Action("New", "Posts", new { id = @Model.GroupId})" class="btn btn-warning">Adauga alta postare</a>
+	<br />
+}
+
+	<hr />
+	<a href="/Groups/Index" class="btn btn-primary" role="button">Inapoi la grupuri</a>
+	<br />

@@ -1,0 +1,23 @@
+﻿
+@{
+	ViewBag.Title = "List";
+}
+
+<h1>Lista de membrilor grupului @ViewBag.GroupName:</h1>
+
+@foreach (var membru in ViewBag.Lista)
+{
+	<div class="panel panel-primary">
+
+		<div class="panel-heading">
+			<h2>@membru.Text</h2>
+		</div>
+
+		@if (ViewBag.Autorizatie == true && ViewBag.CurrentUser!=membru.Value && ViewBag.IsAdmin == false || ViewBag.IsAdmin == true && ViewBag.CurrentUser != membru.Value)
+		{
+			<div class="panel-footer">
+				<a href="@Url.Action("Kick", "Memberships", new { id = ViewBag.GroupId, name = membru.Value })" class="btn btn-warning">înlătură din Grup</a>
+			</div>
+		}
+	</div>
+}
